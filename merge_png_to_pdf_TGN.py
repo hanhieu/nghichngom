@@ -23,7 +23,7 @@ def merge_images_in_folder_to_pdf(folder_path, output_pdf_path):
     c.save()
 
 # Example usage
-folder_path = "E:/Report/TGN/73-23T12"
+folder_path = "E:/Report/TGN/75"
 output_pdf_path = folder_path+ "/merged_images.pdf"
 
 merge_images_in_folder_to_pdf(folder_path, output_pdf_path)
