@@ -375,7 +375,7 @@ while True:
     ticker = input("Nhập ticker: ")
     try:
         save_excel(ticker)
-        print("Đã tạo file excel cho " + ticker)
+        print("Đã tạo file excel cho " + ticker.upper())
     except:
         print("Có lỗi xảy ra, vui lòng kiểm tra lại ticker")
 
