@@ -448,6 +448,7 @@ def save_excel(ticker):
     wb.save(ticker+'.xlsx')
     formatting(ticker,dataY,'Indicator_Y')
     formatting(ticker,dataQ,'Indicator_Q')
+
 #create input "Nhập ticker: " and run save_excel function
 while True:
     ticker = input("Nhập ticker: ")
