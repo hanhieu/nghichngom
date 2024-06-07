@@ -365,8 +365,8 @@ list_row = ['mc','Doanh số thuần',
     'bs_fa','Phải thu dài hạn','Tài sản dở dang dài hạn','Đầu tư dài hạn','other_asset',
     'TỔNG TÀI SẢN',
     
-    'NỢ PHẢI TRẢ','Vay ngắn hạn','Vay dài hạn','bs_cust_pre','Phải trả người bán','other_lia','netdebt',
-    'VỐN CHỦ SỞ HỮU','Vốn góp','Thặng dư vốn cổ phần','Cổ phiếu Quỹ','Lãi chưa phân phối','Lợi ích cổ đông không kiểm soát','other_equity',
+    'NỢ PHẢI TRẢ','Vay ngắn hạn','Vay dài hạn','bs_cust_pre','Phải trả người bán','other_lia',
+    'VỐN CHỦ SỞ HỮU','Vốn góp','Thặng dư vốn cổ phần','Cổ phiếu Quỹ','Lãi chưa phân phối','Lợi ích cổ đông không kiểm soát','other_equity','netdebt',
     
     'Lưu chuyển tiền thuần từ các hoạt động sản xuất kinh doanh','Khấu hao TSCĐ',
     'Lưu chuyển tiền tệ ròng từ hoạt động đầu tư','Tiền mua tài sản cố định và các tài sản dài hạn khác','Tiền thu được từ thanh lý tài sản cố định','Cổ tức và tiền lãi nhận được',
