@@ -430,14 +430,14 @@ def formatting(ticker,data,worksheet):
 def save_excel(ticker):
     ticker = ticker.upper()
     x = get_data_Y(ticker)
-    x = x.to_pandas(x)
+    x = x.to_pandas()
     x.to_excel(ticker+'.xlsx',index=False,sheet_name='Raw_data_Y')
     x.set_index('dates',inplace=True)
     x = x.T
     dataY = x.loc[list_row]
 
     y = get_data_Q(ticker)
-    y = y.to_pandas(y)
+    y = y.to_pandas()
     
     wb = load_workbook(ticker+'.xlsx')
     wsQ = wb.create_sheet('Raw_data_Q')
