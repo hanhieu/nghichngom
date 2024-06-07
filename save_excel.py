@@ -250,8 +250,11 @@ def get_fs_Y(ticker):
     fs = fs.dropna(axis=0,thresh=40)
     fs['dates'] = fs.index.astype(int)
     fs = fs.loc[:,~fs.columns.duplicated(keep='first')]
-    mc = get_mc_Y(ticker)
-    fs = fs.merge(mc[['mc','dates']], on='dates')
+    try:
+        mc = get_mc_Y(ticker)
+    except:
+        mc = pd.DataFrame(columns=['mc','dates'])
+    fs = fs.merge(mc[['mc','dates']], on='dates', how='left')
 
     
     return fs
@@ -316,9 +319,11 @@ def get_fs_Q(ticker):
     fs['dates'] = pd.PeriodIndex(year=fs["year"], quarter=fs["quarter"])
     fs['dates'] = fs['dates'].dt.to_timestamp(freq='Q')
     fs = fs.sort_values(by='dates')
-    mc = get_mc_Q(ticker)
+    try:
+        mc = get_mc_Q(ticker)
+    except:
+        mc = pd.DataFrame(columns=['mc','dates'])
     fs = fs.merge(mc[['mc','dates']], on='dates', how='left')
-
     return fs
 
 
@@ -425,14 +430,14 @@ def formatting(ticker,data,worksheet):
 def save_excel(ticker):
     ticker = ticker.upper()
     x = get_data_Y(ticker)
-    x = x.to_pandas()
+    x = x.to_pandas(x)
     x.to_excel(ticker+'.xlsx',index=False,sheet_name='Raw_data_Y')
     x.set_index('dates',inplace=True)
     x = x.T
     dataY = x.loc[list_row]
 
     y = get_data_Q(ticker)
-    y = y.to_pandas()
+    y = y.to_pandas(y)
     
     wb = load_workbook(ticker+'.xlsx')
     wsQ = wb.create_sheet('Raw_data_Q')
@@ -448,7 +453,6 @@ def save_excel(ticker):
     wb.save(ticker+'.xlsx')
     formatting(ticker,dataY,'Indicator_Y')
     formatting(ticker,dataQ,'Indicator_Q')
-
 #create input "Nhập ticker: " and run save_excel function
 while True:
     ticker = input("Nhập ticker: ")
@@ -458,4 +462,5 @@ while True:
     except Exception as e:
         print("Có lỗi xảy ra, vui lòng kiểm tra lại ticker")
         print(e)
+
 
