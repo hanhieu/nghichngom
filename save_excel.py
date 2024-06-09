@@ -1,7 +1,3 @@
-# %% [markdown]
-# # GET SSI
-
-# %%
 import pandas as pd
 import requests
 from pandas import json_normalize
@@ -12,11 +8,11 @@ from datetime import datetime, timedelta
 import json
 import polars as pl
 
-# %%
+
 idx = pd.IndexSlice
 pd.options.display.float_format = '{:,.3f}'.format
 
-# %%
+
 # API request config for SSI API endpoints
 ssi_headers = {
         'Connection': 'keep-alive',
@@ -39,7 +35,7 @@ ssi_headers = {
         'Accept-Language': 'en-US,en;q=0.9,vi-VN;q=0.8,vi;q=0.7'
         }
 
-# %%
+
 def organ_listing (lang='vi', headers=ssi_headers):
     """
     Return a DataFrame of all available stock symbols. Live data is retrieved from the SSI API.
@@ -124,7 +120,7 @@ def mc(symbol='SSI',frequency='Quarterly'):
             return None
 
 
-# %%
+
 def get_mc_Y(ticker):    
     x = mc(ticker,'Yearly')
     x = x.T
@@ -152,7 +148,7 @@ def get_mc_Q(ticker):
     x = x.sort_values(by='dates')
     return x
 
-# %%
+
 list_chitieu = ['dates','mc','TỔNG TÀI SẢN','TÀI SẢN NGẮN HẠN','Tiền và tương đương tiền','Giá trị thuần đầu tư ngắn hạn','Các khoản phải thu','Hàng tồn kho, ròng','TÀI SẢN DÀI HẠN','Phải thu dài hạn','Tài sản cố định','GTCL TSCĐ hữu hình','Nguyên giá TSCĐ hữu hình','Khấu hao lũy kế TSCĐ hữu hình','GTCL Tài sản thuê tài chính','Nguyên giá tài sản thuê tài chính','Khấu hao lũy kế tài sản thuê tài chính','GTCL tài sản cố định vô hình','Nguyên giá TSCĐ vô hình','Khấu hao lũy kế TSCĐ vô hình','Bất động sản đầu tư','Nguyên giá tài sản đầu tư','Khấu hao lũy kế tài sản đầu tư','Tài sản dở dang dài hạn','Đầu tư dài hạn',
                 'NỢ PHẢI TRẢ','Nợ ngắn hạn','Phải trả người bán','Người mua trả tiền trước','Doanh thu chưa thực hiện ngắn hạn','Vay ngắn hạn','Nợ dài hạn','Người mua trả tiền trước dài hạn','Doanh thu chưa thực hiên','Vay dài hạn','Trái phiếu chuyển đổi','VỐN CHỦ SỞ HỮU','Vốn góp','Thặng dư vốn cổ phần','Cổ phiếu Quỹ','Lãi chưa phân phối','Lợi ích cổ đông không kiểm soát','Doanh số thuần','Lãi gộp','Thu nhập tài chính','Chi phí tài chính','Trong đó: Chi phí lãi vay','Lãi/(lỗ) từ công ty liên doanh','Chi phí bán hàng','Chi phí quản lý doanh  nghiệp','Thu nhập khác, ròng','Lãi/(lỗ) ròng trước thuế','Lãi/(lỗ) thuần sau thuế','Lợi nhuận của Cổ đông của Công ty mẹ',
                 'Lưu chuyển tiền thuần từ các hoạt động sản xuất kinh doanh','Khấu hao TSCĐ',
@@ -165,7 +161,7 @@ list_chitieu = ['dates','mc','TỔNG TÀI SẢN','TÀI SẢN NGẮN HẠN','Ti�
 ]
 
 
-# %%
+
 def add_ratios(x):
     x = x.select(list_chitieu)
     x = x.with_columns([
@@ -226,7 +222,7 @@ def g_func(x):
 
 
 
-# %%
+
 def get_fs_Y(ticker):
     bs = financial_report(ticker,'BalanceSheet','Yearly')
     # bs = bs.loc[:, (bs==0).mean() < .6]
@@ -267,7 +263,7 @@ def get_data_Y(ticker):
     return fs
 
 
-# %%
+
 col1 = ['Lãi gộp', 'op', 'EBT', 'Lãi/(lỗ) ròng trước thuế', 'Lãi/(lỗ) thuần sau thuế', 'Lợi nhuận của Cổ đông của Công ty mẹ', 'core_e','EBITDA']
 col3 = ['Doanh số thuần', 'Lãi gộp', 'op', 'EBT', 'Lãi/(lỗ) ròng trước thuế', 'Lãi/(lỗ) thuần sau thuế', 'Lợi nhuận của Cổ đông của Công ty mẹ', 'core_e','EBITDA']
 col2 = ['Doanh số thuần', 'Lãi gộp', 'op', 'EBT', 'Lãi/(lỗ) ròng trước thuế', 'Lãi/(lỗ) thuần sau thuế', 'Lợi nhuận của Cổ đông của Công ty mẹ', 'core_e','EBITDA', 
@@ -339,7 +335,7 @@ def get_data_Q(ticker):
     x = x.with_columns([(pl.col('dates').dt.strftime("%Y-%m")).alias('dates')])
     return x
 
-# %%
+
 import os
 from openpyxl import load_workbook
 from openpyxl.utils.dataframe import dataframe_to_rows
@@ -379,7 +375,7 @@ list_row = ['mc','Doanh số thuần',
     ]
 
 
-# %%
+
 header = NamedStyle(name="header")
 header.font = Font(bold=True, color="ffffff", size=12,name='Roboto')
 header.border = Border(bottom=Side(border_style="thin"))
