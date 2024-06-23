@@ -116,7 +116,7 @@ def mc(symbol='SSI',frequency='Quarterly'):
             df = df.rename(columns={'Chỉ số': 'LengthReport'})
             return df.iloc[[1],:]
         else:
-            print(f'Error {status} when getting data from SSI. Details:\n {response.text}')
+            print(f'Error {status} when getting data. Details:\n {response.text}')
             return None
 
 
@@ -126,7 +126,10 @@ def get_mc_Y(ticker):
     x = x.T
     x.columns = x.iloc[0]
     x = x.iloc[1:,:]
-    x = x.loc[~x.index.str.contains(r'\.')]
+    #include only rows contains ".3" in last 2 string of index
+    x = x[x.index.str[-2:] == '.3']
+    #get first 4 characters of index
+    x.index = x.index.str[:4]
     x['dates'] = x.index.astype(int)
     #replace 0 with NaN value
     x = x.replace(0, np.nan)
