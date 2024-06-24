@@ -12,8 +12,7 @@ import os
 pdf_folder = os.path.expanduser("~/Desktop/")
 idx = pd.IndexSlice
 pd.options.display.float_format = '{:,.3f}'.format
-sql_col = pd.read_excel('E:/Data/6.Python/FiinBox/SQL-col.xlsx',
-                       sheet_name='Sheet3')
+
 
 connection_string = "DRIVER={SQL Server};SERVER=113.160.94.133,63830;DATABASE=FiinRatings;UID=FiinRatings.FRA.View;PWD=Fiin@1212"
 connection_url = URL.create("mssql+pyodbc", query={"odbc_connect": connection_string})
@@ -118,7 +117,6 @@ ORDER BY a.TaxCode ASC, p.RealYear ASC, p.RealQuarter ASC;
  
     with engine.begin() as conn:
         df = pd.read_sql_query(sa.text(query), conn)
-    ##    df = pd.read_sql_query(query, conn)
         df = df.loc[:,~df.columns.duplicated()]  
         df.to_excel(pdf_folder + df['OrganizationName'][0] + '.xlsx')
         print('Đã lưu '+df['OrganizationName'][0])
