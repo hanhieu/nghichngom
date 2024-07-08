@@ -1,5 +1,6 @@
 import os
 import streamlit as st
+import plotly.graph_objects as go
 
 # Get the current working directory
 current_dir = os.getcwd()
@@ -13,7 +14,6 @@ st.title("CHÀO MỪNG")
 
 # Display the title on the Streamlit app
 st.write("Hello, world!")
-import plotly.graph_objects as go
 
 # Create data for the first bar chart
 x1 = ['A', 'B', 'C', 'D']
@@ -29,11 +29,8 @@ fig1 = go.Figure(data=go.Bar(x=x1, y=y1))
 # Create the second bar chart
 fig2 = go.Figure(data=go.Bar(x=x2, y=y2))
 
-# Display the first bar chart in the first column
+# Display the first bar chart
 st.plotly_chart(fig1, use_container_width=True)
 
-# Display the second bar chart in the second column
+# Display the second bar chart
 st.plotly_chart(fig2, use_container_width=True)
-
-
-
